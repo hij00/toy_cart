@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# Redux
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 기본 세팅
 
-## Available Scripts
+1. redux 설치
+   npm install @reduxjs/toolkit react-redux
 
-In the project directory, you can run:
+2. store.js 파일 생성 / 코드 복붙
+   import { configureStore } from '@reduxjs/toolkit'
 
-### `npm start`
+export default configureStore({
+reducer: { }
+})
+store.js 는 redux를 사용해 state를 전부 보관하고,
+그 state들을 export 해서 다른 파일에서 사용가능하도록 해줌
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+3. index.js 파일에서 App 컴포넌트를 Provider로 감싸주고 store.js를 import하기
+   import store from './store.js'
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+4. store.js 상단에 코드 복붙
+   import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-### `npm test`
+### store.js의 state 만들기
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. 변수선언 / items 변수에 createSlice()를 할당
+   let items = createSlice({
+   })
 
-### `npm run build`
+2. createSlice()안에 객체 할당 => 이름, 초기 state인 initialstate
+   let items = createSlice({
+   name: 'items',
+   initialState : 0,
+   })
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. initialState에 임의 정보 넣기
+   let items = createSlice({
+   name: 'items',
+   initialState : [{
+   id: 0,
+   name: '나이키 에어포스',
+   count: 1
+   },
+   {id: 1,
+   name: '나이키 범고래',
+   count: 1}],
+   })
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. store.js 제일 아래에 해당 state 배출
+   export default configureStore({
+   reducer: {
+   players : players.reducer
+   }
+   })
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### store.js의 state 사용방법
 
-### `npm run eject`
+1. 원하는 컴포넌트 페이지 상단에 import
+   import {useSelector} from "react-redux"
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. 컴포넌트 안에어 변수로 선언(return 전에)
+   let cart = useSelector(state => state)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. 형식
+<div>{cart.변수이름[0].name}</div>
+변수에 있는 배열의 첫번째 항목
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### store.js에 함수 선언
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1.  변수 안에 임의로 넣었던 정보 빼고 시작
+    let items = createSlice({
+    name: 'items',
+    initialState : [
+    ],
+    reducers : {
+    }
+    })
+    reducers는 기존에 저장되어있는 initialState를 조작하는 함수를 만들어줌
 
-## Learn More
+2.  장바구니의 수량변경, 삭제기능을 reducers안에 함수로 구현
+    addCount(state, action) {
+    let num = state.findIndex((a) => a.id === action.payload);
+    state[num].count++;
+    },
+    각 함수의 파라미터 중 state파라미터는 initialState인 빈 배열을 뜻함
+    action파라미터, action.payload는 함수를 호출하는 곳에서 직접 받아온 값
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3.  import하고 선언
+    import { useDispatch, useSelector } from "react-redux";
+    let dispatch = useDispatch();
+    redux에서 함수를 받아와서 사용하려면 dispatch 를 써야함

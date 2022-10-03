@@ -24,3 +24,5 @@ export const menuDb = [
     url: "https://ae01.alicdn.com/kf/H9041677fea5d41bf94561e78f76912a6i/M2K-TEKNO-AV4789-100.jpg_Q90.jpg_.webp",
   },
 ];
+
+export const cartDb = [];
