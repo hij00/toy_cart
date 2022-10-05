@@ -1,8 +1,15 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { menuDb } from "../../Db";
 import { mainStyle } from "../../style/GlobalStyle";
+import { addCart } from "../../store/action";
 
 export const Main = () => {
+  const dispatch = useDispatch();
+  // const onClick = () => {
+  //   dispatch(addCart(menuDb));
+  //   console.log(menuDb);
+  // };
   return (
     <Wrap>
       <ItemWrap>
@@ -11,7 +18,7 @@ export const Main = () => {
             <Img src={a.url} />
             <Title>{a.name}</Title>
             <Desc>{a.price} 원</Desc>
-            <Btn>장바구니 추가 +</Btn>
+            <Btn onClick={() => dispatch(addCart(a))}>장바구니 추가 +</Btn>
           </Item>
         ))}
       </ItemWrap>

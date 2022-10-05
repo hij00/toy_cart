@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 ${reset}
 *{
     box-sizing: border-box;
+    font-family: Noto Sans KR;
 }
 a{
     text-decoration: none;

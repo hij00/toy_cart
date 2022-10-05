@@ -3,8 +3,8 @@ import { mainStyle } from "../../style/GlobalStyle";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Cart = () => {
-  let cart = useSelector((state) => state);
   let dispatch = useDispatch();
+  let cart = useSelector((state) => state);
 
   return (
     <Wrap>
@@ -30,7 +30,7 @@ export const Cart = () => {
           </tr>
         </thead>
         <tbody>
-          {cart.items.map((a, i) => (
+          {/* {cart.items.map((a, i) => (
             <tr key={i}>
               <td>{cart.items[i].id}</td>
               <td>{cart.items[i].name}</td>
@@ -57,7 +57,7 @@ export const Cart = () => {
                 삭제
               </button>
             </tr>
-          ))}
+          ))} */}
         </tbody>
       </Table>
     </Wrap>
