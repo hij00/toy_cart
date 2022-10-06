@@ -1,10 +1,21 @@
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mainStyle } from "../style/GlobalStyle";
 
 export const Header = () => {
+  const [count, setCount] = useState(0);
+  let cart = useSelector((state) => state);
+
+  useEffect(() => {
+    let count = 0;
+    // cart.forEach((item) => {
+    //   count += item.qty;
+    // });
+  }, [cart, count]);
   return (
     <Wrap>
       <Logo>
@@ -14,6 +25,7 @@ export const Header = () => {
         <Menu>
           <Link to="/cart">
             <FontAwesomeIcon icon={faBagShopping} />
+            {count}
           </Link>
         </Menu>
       </MenuWrap>

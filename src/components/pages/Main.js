@@ -6,10 +6,6 @@ import { addCart } from "../../store/action";
 
 export const Main = () => {
   const dispatch = useDispatch();
-  // const onClick = () => {
-  //   dispatch(addCart(menuDb));
-  //   console.log(menuDb);
-  // };
   return (
     <Wrap>
       <ItemWrap>

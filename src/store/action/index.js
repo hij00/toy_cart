@@ -11,3 +11,20 @@ export const deleteCart = (items) => {
     payload: items,
   };
 };
+
+export const adjustQty = (itemss, value) => {
+  return {
+    type: "ADJUST_QTY",
+    payload: {
+      id: itemss,
+      qty: value,
+    },
+  };
+};
+
+export const currentItem = (itemsss) => {
+  return {
+    type: "CURRENT_ITEM",
+    payload: itemsss,
+  };
+};

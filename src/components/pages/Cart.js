@@ -8,19 +8,6 @@ export const Cart = () => {
 
   return (
     <Wrap>
-      {/* <MenuWrap>
-        <Menu>선택</Menu>
-        <Menu>제품사진</Menu>
-        <Menu>제품명</Menu>
-        <Menu>가격</Menu>
-      </MenuWrap>
-      <ConWrap>
-        <Con>선택</Con>
-        <Img>선택</Img>
-        <Title>나이키 범고래</Title>
-        <Price>199,000 원</Price>
-      </ConWrap> */}
-
       <Table>
         <thead>
           <tr>
