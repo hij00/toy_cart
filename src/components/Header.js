@@ -7,15 +7,19 @@ import styled from "styled-components";
 import { mainStyle } from "../style/GlobalStyle";
 
 export const Header = () => {
+  let cart = useSelector((state) => state.cartReducer.cart);
   const [count, setCount] = useState(0);
-  let cart = useSelector((state) => state);
 
   useEffect(() => {
-    let count = 0;
-    // cart.forEach((item) => {
-    //   count += item.qty;
-    // });
+    let cartCount = 0;
+    cart.forEach((item) => {
+      cartCount += item.qty;
+    });
+    setCount(cartCount);
   }, [cart, count]);
+  // forEach는 배열을 호출해야함, cart(스테이트 속성) -> cartReducer(컴바인리듀서 이름) -> state
+  // useSelector(state => state)
+
   return (
     <Wrap>
       <Logo>
