@@ -3,6 +3,11 @@ import reset from "styled-reset";
 
 export const mainStyle = {
   padding: "0 150px",
+
+  mainColor: "#06113C",
+  subColor: "#FF8C32",
+  subColor2: "#DDDDDD",
+  pointColor: "#EEEEEE",
 };
 
 export const GlobalStyle = createGlobalStyle`
