@@ -46,7 +46,7 @@ const Wrap = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
-  border-bottom: 1px solid #1d1d1d;
+  /* background-color: white; */
 `;
 
 const Logo = styled.div`

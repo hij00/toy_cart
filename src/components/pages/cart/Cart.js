@@ -42,10 +42,25 @@ export const Cart = () => {
         ))}
       </SubWrap>
       <CartBox>
-        <CTitle>주문서</CTitle>
-        <CDesc>상품가격</CDesc>
-        <CDesc>배송비</CDesc>
-        <CTotal>총 합계</CTotal>
+        <CTitle>Order Summary</CTitle>
+        <CDescBox>
+          상품가격
+          <CDesc>
+            <span>2500</span> 원
+          </CDesc>
+        </CDescBox>
+        <CDescBox>
+          배송비
+          <CDesc>
+            <span>2500</span> 원
+          </CDesc>
+        </CDescBox>
+        <CTotal>
+          결제금액
+          <h1>
+            <span>2500</span> 원
+          </h1>
+        </CTotal>
         <CBtn>주문하기</CBtn>
       </CartBox>
     </Wrap>
@@ -54,12 +69,14 @@ export const Cart = () => {
 
 const Wrap = styled.div`
   display: flex;
-  margin-top: 120px;
-  padding: ${mainStyle.padding};
+
+  /* padding: ${mainStyle.padding}; */
+  padding: 0 0 0 150px;
   width: 100%;
 `;
 
 const SubWrap = styled.div`
+  margin-top: 120px;
   width: 70%;
   margin-right: 70px;
   text-align: center;
@@ -137,25 +154,82 @@ const Desc = styled.div`
   &.delete {
     all: unset;
     padding: 5px 10px;
-    background-color: ${mainStyle.subColor};
+    border: 1px solid ${mainStyle.subColor};
     border-radius: 10px;
+    color: ${mainStyle.subColor};
+    transition: 0.5s;
+    &:hover {
+      color: white;
+      background-color: ${mainStyle.subColor};
+    }
   }
 `;
 
 const CartBox = styled.div`
-  width: 30%;
-  height: 500px;
-  background-color: lightgray;
+  width: 40%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 50px 30px;
+  background-color: ${mainStyle.subColor2};
 `;
 
-const CTitle = styled.div``;
+const CTitle = styled.div`
+  width: 100%;
+  font-size: 50px;
+  font-weight: 700;
+  padding: 230px 0 20px 30px;
+  background-color: ${mainStyle.subColor2};
+`;
 
-const CDesc = styled.div``;
+const CDescBox = styled.div`
+  width: 100%;
+  height: 70px;
+  line-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid ${mainStyle.subColor2};
+  padding: 0 150px 0 30px;
+  background-color: ${mainStyle.pointColor};
+`;
 
-const CTotal = styled.div``;
+const CDesc = styled.div`
+  font-size: 18px;
+  span {
+    font-weight: 700;
+  }
+`;
 
-const CBtn = styled.button``;
+const CTotal = styled.div`
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  background-color: ${mainStyle.subColor2};
+  padding: 0 150px 0 30px;
+  font-size: 20px;
+  font-weight: 700;
+  span {
+    font-weight: 900;
+    font-size: 24px;
+  }
+`;
+
+const CBtn = styled.button`
+  all: unset;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  /* border: 1px solid ${mainStyle.mainColor}; */
+  border-bottom: 1px solid ${mainStyle.mainColor};
+  border-top: 1px solid ${mainStyle.mainColor};
+  transition: 0.5s;
+  padding: 20px 0;
+  font-size: 22px;
+  font-weight: 900;
+  &:hover {
+    background-color: ${mainStyle.mainColor};
+    color: white;
+  }
+`;
