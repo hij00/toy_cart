@@ -1,45 +1,40 @@
 import styled from "styled-components";
 import { mainStyle } from "../../../style/GlobalStyle";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteCart } from "../../../store/action";
+import { useSelector } from "react-redux";
+import { CartItem } from "./CartItem";
+import { useEffect, useState } from "react";
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
-  // console.log(cart);
-  const dispatch = useDispatch();
+  const [show, setShow] = useState("table-row");
+  const [cartItem, setCartItem] = useState();
+  useEffect(() => {
+    const cartItem =
+      cart.length >= 1 ? (
+        cart.map((item, idx) => (
+          <ConWrap key={idx}>
+            <CartItem item={item} />
+          </ConWrap>
+        ))
+      ) : (
+        <>
+          {<NoItem>장바구니가 비었습니다</NoItem>} {setShow("none")}
+        </>
+      );
+    setCartItem(cartItem);
+  }, []);
 
   return (
     <Wrap>
       <SubWrap>
-        <MenuWrap>
+        <MenuWrap show={show}>
           <Menu className="con">제품</Menu>
           <Menu className="price">가격</Menu>
           <Menu className="qty">수량</Menu>
           <Menu className="total">합계</Menu>
           <Menu className="delete"></Menu>
         </MenuWrap>
-        {cart.map((item, idx) => (
-          <ConWrap key={idx}>
-            <Con>
-              <ConBody>
-                <Img src={item.url} alt={item.name}></Img>
-                <Title>{item.name}</Title>
-              </ConBody>
-            </Con>
-
-            <DescBox className="price">{item.price}</DescBox>
-            <DescBox className="qty">{item.qty}</DescBox>
-            <DescBox className="total">원</DescBox>
-            <DescBox className="delete">
-              <Desc
-                className="delete"
-                onClick={() => dispatch(deleteCart(item.id))}
-              >
-                삭제
-              </Desc>
-            </DescBox>
-          </ConWrap>
-        ))}
+        {cartItem}
       </SubWrap>
       <CartBox>
         <CTitle>Order Summary</CTitle>
@@ -84,7 +79,7 @@ const SubWrap = styled.div`
 
 const MenuWrap = styled.div`
   width: 100%;
-  display: table-row;
+  display: ${(props) => props.show};
   margin-bottom: 50px;
   text-align: center;
 `;
@@ -114,55 +109,6 @@ const Menu = styled.div`
 const ConWrap = styled.div`
   display: table-row;
   width: 100%;
-`;
-
-const Con = styled.div`
-  display: table-cell;
-  vertical-align: middle;
-  width: 20%;
-  border-top: 1px solid ${mainStyle.subColor2};
-  padding: 20px 0;
-`;
-
-const ConBody = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Img = styled.img`
-  width: 20%;
-  margin-right: 20px;
-`;
-
-const Title = styled.div`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-const DescBox = styled.div`
-  display: table-cell;
-  vertical-align: middle;
-  /* text-align: right; */
-  border-top: 1px solid ${mainStyle.subColor2};
-  /* padding-right: 10px; */
-  &.delete {
-    text-align: right;
-  }
-`;
-
-const Desc = styled.div`
-  &.delete {
-    all: unset;
-    padding: 5px 10px;
-    border: 1px solid ${mainStyle.subColor};
-    border-radius: 10px;
-    color: ${mainStyle.subColor};
-    transition: 0.5s;
-    &:hover {
-      color: white;
-      background-color: ${mainStyle.subColor};
-    }
-  }
 `;
 
 const CartBox = styled.div`
@@ -231,4 +177,11 @@ const CBtn = styled.button`
     background-color: ${mainStyle.mainColor};
     color: white;
   }
+`;
+
+const NoItem = styled.div`
+  height: 50vh;
+  line-height: 50vh;
+  font-size: 22px;
+  font-weight: 700;
 `;

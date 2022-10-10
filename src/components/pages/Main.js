@@ -58,12 +58,15 @@ const Btn = styled.button`
   all: unset;
   width: 100%;
   font-size: 18px;
+  font-weight: 900;
+  color: ${mainStyle.mainColor};
   padding: 14px 0;
   text-align: center;
-  border: 1px solid #1d1d1d;
+  border: 1px solid ${mainStyle.mainColor};
   transition: 0.5s;
+
   &:hover {
-    background-color: #1d1d1d;
+    background-color: ${mainStyle.mainColor};
     color: white;
   }
 `;
