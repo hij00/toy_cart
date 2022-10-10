@@ -221,9 +221,8 @@ const CBtn = styled.button`
   width: 100%;
   text-align: center;
   box-sizing: border-box;
-  /* border: 1px solid ${mainStyle.mainColor}; */
-  border-bottom: 1px solid ${mainStyle.mainColor};
-  border-top: 1px solid ${mainStyle.mainColor};
+  background-color: ${mainStyle.pointColor};
+
   transition: 0.5s;
   padding: 20px 0;
   font-size: 22px;
