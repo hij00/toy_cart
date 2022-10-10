@@ -2,32 +2,32 @@ import styled from "styled-components";
 import { mainStyle } from "../../../style/GlobalStyle";
 import { useSelector } from "react-redux";
 import { CartItem } from "./CartItem";
-import { useEffect, useState } from "react";
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
-  const [show, setShow] = useState("table-row");
-  const [cartItem, setCartItem] = useState();
-  useEffect(() => {
-    const cartItem =
-      cart.length >= 1 ? (
-        cart.map((item, idx) => (
+  const cartItem =
+    cart.length >= 1 ? (
+      cart.map((item, idx) => (
+        <>
           <ConWrap key={idx}>
             <CartItem item={item} />
           </ConWrap>
-        ))
-      ) : (
-        <>
-          {<NoItem>장바구니가 비었습니다</NoItem>} {setShow("none")}
         </>
-      );
-    setCartItem(cartItem);
-  }, []);
+      ))
+    ) : (
+      <>
+        <NoItem>장바구니</NoItem>
+      </>
+    );
 
   return (
     <Wrap>
       <SubWrap>
-        <MenuWrap show={show}>
+        <MenuWrap
+          style={{
+            display: `${cart.length <= 0 ? "none" : "table-row"}`,
+          }}
+        >
           <Menu className="con">제품</Menu>
           <Menu className="price">가격</Menu>
           <Menu className="qty">수량</Menu>
@@ -64,8 +64,6 @@ export const Cart = () => {
 
 const Wrap = styled.div`
   display: flex;
-
-  /* padding: ${mainStyle.padding}; */
   padding: 0 0 0 150px;
   width: 100%;
 `;
@@ -79,7 +77,7 @@ const SubWrap = styled.div`
 
 const MenuWrap = styled.div`
   width: 100%;
-  display: ${(props) => props.show};
+
   margin-bottom: 50px;
   text-align: center;
 `;
