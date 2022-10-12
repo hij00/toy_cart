@@ -18,6 +18,7 @@ export const CartItem = ({ item }) => {
       <DescBox className="qty">
         <QtyBtn>-</QtyBtn>
         {item.qty}
+        <input min="1" type="number" value={item.qty}></input>
         <QtyBtn>+</QtyBtn>
       </DescBox>
       <DescBox className="total">원</DescBox>

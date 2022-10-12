@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mainStyle } from "../../../style/GlobalStyle";
 import { useSelector } from "react-redux";
 import { CartItem } from "./CartItem";
+import { useEffect, useState } from "react";
 
 export const Cart = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
@@ -16,9 +17,23 @@ export const Cart = () => {
       ))
     ) : (
       <>
-        <NoItem>장바구니</NoItem>
+        <NoItem>장바구니가 비었습니다.</NoItem>
       </>
     );
+
+  const [totalP, setTotalP] = useState(0);
+  const [totalI, setTotalI] = useState(0);
+
+  useEffect(() => {
+    let items = 0;
+    let price = 0;
+    cart.forEach((item) => {
+      items += item.qty;
+      price += item.qty * item.price;
+    });
+    setTotalP(price);
+    setTotalI(items);
+  }, [cart, totalI, totalP, setTotalI, setTotalP]);
 
   return (
     <Wrap>
@@ -41,7 +56,7 @@ export const Cart = () => {
         <CDescBox>
           상품가격
           <CDesc>
-            <span>2500</span> 원
+            <span>{totalP}</span> 원
           </CDesc>
         </CDescBox>
         <CDescBox>
@@ -53,7 +68,7 @@ export const Cart = () => {
         <CTotal>
           결제금액
           <h1>
-            <span>2500</span> 원
+            <span>`{{ totalP } + 2500}`</span> 원
           </h1>
         </CTotal>
         <CBtn>주문하기</CBtn>
