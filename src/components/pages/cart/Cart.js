@@ -8,13 +8,7 @@ export const Cart = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
   const cartItem =
     cart.length >= 1 ? (
-      cart.map((item, idx) => (
-        <>
-          <ConWrap key={idx}>
-            <CartItem item={item} />
-          </ConWrap>
-        </>
-      ))
+      cart.map((item, index) => <CartItem key={index} item={item} />)
     ) : (
       <>
         <NoItem>장바구니가 비었습니다.</NoItem>
@@ -23,14 +17,17 @@ export const Cart = () => {
 
   const [totalP, setTotalP] = useState(0);
   const [totalI, setTotalI] = useState(0);
-
   useEffect(() => {
     let items = 0;
     let price = 0;
     cart.forEach((item) => {
       items += item.qty;
       price += item.qty * item.price;
+      // +로 하면 01129,0001153,000 이렇게 뜸
+      // *로 하면 에러남,
+      // price를 스트링으로 해서 그런듯! 원래 "129,000" 이렇게 있었음
     });
+    // console.log(price);
     setTotalP(price);
     setTotalI(items);
   }, [cart, totalI, totalP, setTotalI, setTotalP]);
@@ -68,7 +65,7 @@ export const Cart = () => {
         <CTotal>
           결제금액
           <h1>
-            <span>`{{ totalP } + 2500}`</span> 원
+            <span>{totalP + 2500}</span> 원
           </h1>
         </CTotal>
         <CBtn>주문하기</CBtn>
@@ -119,10 +116,10 @@ const Menu = styled.div`
   }
 `;
 
-const ConWrap = styled.div`
-  display: table-row;
-  width: 100%;
-`;
+// const ConWrap = styled.div`
+//   display: table-row;
+//   width: 100%;
+// `;
 
 const CartBox = styled.div`
   width: 40%;
