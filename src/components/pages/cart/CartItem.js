@@ -26,15 +26,12 @@ export const CartItem = ({ item }) => {
 
       <DescBox className="price">{item.priceS}</DescBox>
       <DescBox className="qty">
-        <QtyBtn>-</QtyBtn>
-        {item.qty}
         <input
           min="1"
           type="number"
           defaultValue={count}
           onChange={onChange}
         ></input>
-        <QtyBtn>+</QtyBtn>
       </DescBox>
       <DescBox className="total">원</DescBox>
       <DescBox className="delete">
@@ -81,6 +78,12 @@ const DescBox = styled.div`
   &.delete {
     text-align: right;
   }
+  input {
+    all: unset;
+    margin-left: 10px;
+    width: 50%;
+    text-align: center;
+  }
 `;
 
 const Desc = styled.div`
@@ -96,9 +99,4 @@ const Desc = styled.div`
       background-color: ${mainStyle.subColor};
     }
   }
-`;
-
-const QtyBtn = styled.button`
-  all: unset;
-  margin: 0 10px;
 `;
