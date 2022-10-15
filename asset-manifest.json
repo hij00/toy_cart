@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/toy_cart/static/js/main.f0e7bbfc.js",
+    "index.html": "/toy_cart/index.html",
+    "main.f0e7bbfc.js.map": "/toy_cart/static/js/main.f0e7bbfc.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.f0e7bbfc.js"
+  ]
+}
