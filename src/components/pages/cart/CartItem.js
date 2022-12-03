@@ -10,7 +10,6 @@ export const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const onChange = (e) => {
-    // console.log(e.target.value);
     setCount(e.target.value);
     dispatch(adjustQty(item.id, e.target.value));
   };

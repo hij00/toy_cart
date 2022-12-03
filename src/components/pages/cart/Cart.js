@@ -23,11 +23,7 @@ export const Cart = () => {
     cart.forEach((item) => {
       items += item.qty;
       price += item.qty * item.price;
-      // +로 하면 01129,0001153,000 이렇게 뜸
-      // *로 하면 에러남,
-      // price를 스트링으로 해서 그런듯! 원래 "129,000" 이렇게 있었음
     });
-    // console.log(price);
     setTotalP(price);
     setTotalI(items);
   }, [cart, totalI, totalP, setTotalI, setTotalP]);
@@ -115,11 +111,6 @@ const Menu = styled.div`
     width: 10%;
   }
 `;
-
-// const ConWrap = styled.div`
-//   display: table-row;
-//   width: 100%;
-// `;
 
 const CartBox = styled.div`
   width: 40%;

@@ -13,7 +13,3 @@ root.render(
     </React.StrictMode>
   </Provider>
 );
-
-// Provider가 뭐지?
-
-// App 컴포넌트에 있는 모든 하위 컴포넌트는 store.js에 있는 state 사용가능

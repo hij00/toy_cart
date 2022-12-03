@@ -15,7 +15,6 @@ export const Main = () => {
             <Title>{a.name}</Title>
             <Desc>{a.price} 원</Desc>
             <Btn onClick={() => dispatch(addCart(a.id))}>장바구니 추가 +</Btn>
-            {/* 아이디값을 addCart 함수에 넣어야함!(그래야 정보가 들어감) */}
           </Item>
         ))}
       </ItemWrap>

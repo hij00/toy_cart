@@ -31,17 +31,15 @@ const INITIAL_STATE = {
 
       url: "https://ae01.alicdn.com/kf/H9041677fea5d41bf94561e78f76912a6i/M2K-TEKNO-AV4789-100.jpg_Q90.jpg_.webp",
     },
-  ], // {id, title, desc, price, img}
-  cart: [], // {id, title, desc, price, img, qty}
+  ],
+  cart: [],
   currentItem: null,
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      // products arr부터 아이템 데이터 얻기
       const item = state.products.find((prod) => prod.id === action.payload);
-      // 카트에 아이템이 이미 있는지(카트아이템의 아이디가 액션과 같다면 참 아니면 거짓)
       const inCart = state.cart.find((item) =>
         item.id === action.payload ? true : false
       );
@@ -67,12 +65,6 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             ? { ...item, qty: +action.payload.qty }
             : item
         ),
-      };
-
-    case "CURRENT_ITEM":
-      return {
-        ...state,
-        currentItem: action.payload,
       };
 
     default:

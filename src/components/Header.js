@@ -17,8 +17,6 @@ export const Header = () => {
     });
     setCount(cartCount);
   }, [cart, count]);
-  // forEach는 배열을 호출해야함, cart(스테이트 속성) -> cartReducer(컴바인리듀서 이름) -> state
-  // useSelector(state => state)
 
   return (
     <Wrap>
@@ -46,7 +44,6 @@ const Wrap = styled.div`
   align-items: center;
   position: fixed;
   top: 0;
-  /* background-color: white; */
 `;
 
 const Logo = styled.div`
